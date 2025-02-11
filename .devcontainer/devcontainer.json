@@ -1,0 +1,19 @@
+{
+	"name": "Default Fullstack pre-set",
+	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"yzhang.markdown-all-in-one",
+				"vivaxy.vscode-conventional-commits",
+				"EditorConfig.EditorConfig",
+				"mhutchie.git-graph",
+				"dbaeumer.vscode-eslint",
+				"bengreenier.vscode-node-readme",
+				"christian-kohler.npm-intellisense"
+			]
+		}
+	},
+    
+    "postCreateCommand": "npm install --global --save-dev @angular/cli @nestjs/cli nodemon"
+}
