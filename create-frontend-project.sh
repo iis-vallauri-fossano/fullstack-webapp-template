@@ -4,8 +4,7 @@
 function create_vanilla_html_css_js_project() {
     echo "Creating Vanilla HTML CSS JS template files..."
     mkdir "css" "js"
-    touch "css/style.css"
-    touch "js/index.js"
+    touch "css/style.css" "js/index.js"
 
     cat <<EOF > "index.html"
 <html>

@@ -7,9 +7,9 @@ function create_vanilla_php_project() {
     echo "DONE"
 
     echo "Creating template files..."
-    mkdir js css
-    touch js/index.js css/style.css
-    cat <<EOF > index.php
+    mkdir "js" "css"
+    touch "js/index.js" "css/style.css"
+    cat <<EOF > "index.php"
 <html>
     <head>
         <title>PHP Vanilla app</title>
@@ -17,7 +17,7 @@ function create_vanilla_php_project() {
         <script src="js/index.js"></script>
     </head>
     <body>
-        <p><?php It Works ?></p>
+        <p><?php echo "It Works" ?></p>
     </body>
 </html>
 EOF
@@ -65,14 +65,14 @@ function create_vanilla_nodejs_project() {
     "type": "commonjs"
 }
 EOF
-    mkdir -p ./src
-    cat <<EOF > src/index.ts
+    mkdir -p "src"
+    cat <<EOF > "src/index.ts"
 import http, { IncomingMessage, ServerResponse } from "http";
 
 const hostname = "127.0.0.1";
 const port = 3000;
 
-const server = http.createServer((req : IncomingMessage, res : ServerResponse<IncomingMessage>) => {
+const server = http.createServer((req: IncomingMessage, res: ServerResponse<IncomingMessage>) => {
     res.statusCode = 200;
     res.setHeader("Content-Type", "text/plain");
     res.end("Hello, World!\n");
@@ -85,7 +85,7 @@ EOF
     echo "DONE"
     
     echo "Adding development packages..."
-    npm install --save-dev typescript ts-node @types/node
+    npm install --save-dev "typescript" "ts-node" "@types/node"
     echo "DONE"
 
     echo "Adding tsconfig.json..."
@@ -135,7 +135,7 @@ EOF
     echo "DONE"
     
     echo "Adding development packages..."
-    npm install --save-dev typescript ts-node @types/node
+    npm install --save-dev "typescript" "ts-node" "@types/node"
     echo "DONE"
 
     echo "Adding tsconfig.json..."
@@ -143,8 +143,8 @@ EOF
     echo "DONE"
 
     echo "Adding express dependency..."
-    npm install --save-dev @types/express
-    npm install express
+    npm install --save-dev "@types/express"
+    npm install "express"
     echo "DONE"
 
     rm -f README.md
@@ -191,7 +191,7 @@ framework_flag="$1"
 cd backend
 
 case "$framework_flag" in
-    "") create_vanilla_project;;
+    "") create_vanilla_nodejs_project;;
     --nodejs) create_vanilla_nodejs_project;;
     --express) create_express_project;;
     --nestjs) create_nestjs_project;;
