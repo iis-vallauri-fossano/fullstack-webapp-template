@@ -53,6 +53,36 @@ function create_angular_project() {
     echo "DONE"
 }
 
+# Creates a Ionic + Angular project with default settings
+function create_angular_ionic_project() {
+    echo "Creating Ionic + Angular project with latest angular and ionic versions"
+
+    echo "Installing required CLI packages..."
+    npm install --global --save-dev @angular/cli @ionic/cli native-run cordova-res
+    echo "DONE"
+
+    echo "Creating the Ionic + Angular project"
+    ionic start frontend tabs \
+        --type="angular-standalone" \
+        --capacitor \
+        --no-interactive \
+        --no-git
+    echo "DONE"
+
+    echo "Adding default capacitors + PWA Elements"
+    npm install @capacitor/camera @capacitor/preferences @capacitor/filesystem @ionic/pwa-elements
+    echo "DONE"
+
+    echo "Importing PWA Elements in project main.ts"
+    sed -i 's|import { defineCustomElements } from "@ionic/pwa-elements/dist/loader";|import { defineCustomElements } from "@ionic/pwa-elements/dist/loader";\n\ndefineCustomElements(window);|' src/main.ts
+    echo "DONE"
+
+    echo "Angular + Ionic project created successfully, saving git commit..."
+    git add .
+    git commit -m "(frontend) :sparkles: Created Angular project from template"
+    echo "DONE"
+}
+
 if find frontend -mindepth 1 -maxdepth 1 | read; then
     echo "Frontend directory is not empty. This script will destroy its contents."
     echo "Are you absolutely sure? (Y/n)"
@@ -76,6 +106,7 @@ case "$framework_flag" in
     "") create_vanilla_html_css_js_project;;
     --html-css-js) create_vanilla_html_css_js_project;;
     --angular) create_angular_project;;
+    --angular-ionic) create_angular_ionic_project;;
 esac
 
 cd "$project_root"
